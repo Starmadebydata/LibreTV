@@ -144,7 +144,21 @@
                 <h3 class="font-semibold mb-2">搜索与显示</h3>
                 <label class="flex items-center justify-between">
                     <span>启用豆瓣热门</span>
-                    <input type="checkbox" id="doubanToggle" class="form-checkbox h-5 w-5 text-pink-600">
+                    <input type="checkbox" id="doubanToggle" class="sr-only">
+                    <div class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 dark:bg-gray-600 transition-colors">
+                        <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform ml-1"></span>
+                    </div>
+                </label>
+                
+                <label class="flex items-center justify-between mt-2">
+                    <span>过滤黄色内容</span>
+                    <div class="relative">
+                        <input type="checkbox" id="yellowFilterToggle" class="sr-only">
+                        <div class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-300 dark:bg-gray-600 transition-colors">
+                            <span class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform ml-1"></span>
+                        </div>
+                        <p class="filter-description text-xs text-gray-500 mt-1 hidden">已禁用：与成人内容API冲突</p>
+                    </div>
                 </label>
             </div>
             
@@ -164,7 +178,20 @@
     </div>
 
     <!-- 模态框和弹窗 -->
-    <!-- ... (所有模态框和弹窗的HTML保持不变, 样式会继承) ... -->
+    <!-- 详情模态框 -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center">
+                <h3 id="modalTitle" class="text-xl font-bold truncate"></h3>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div id="modalContent" class="p-4 overflow-y-auto flex-grow"></div>
+        </div>
+    </div>
 
     <!-- 脚本 -->
     <script src="libs/sha256.min.js"></script>
