@@ -1,26 +1,47 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="refresh" content="3; url=player.html">
     <title>正在跳转到播放器...</title>
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="css/watch.css">
+    <script src="libs/tailwindcss.min.js"></script>
+    <script>
+        // 主题切换逻辑
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        // 页面加载时应用保存的主题
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(savedTheme);
+        });
+    </script>
     <script src="js/watch.js"></script>
 </head>
-<body>
-    <div class="redirect-container">
-        <div class="logo-container">
-            <svg class="logo-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
-            </svg>
-            <h1 class="logo-text">LibreTV</h1>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+    <div class="min-h-screen flex flex-col items-center justify-center text-center p-4">
+        <!-- Logo -->
+        <div class="flex items-center justify-center space-x-3 mb-6">
+            <svg class="w-12 h-12 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+            <h1 class="text-4xl font-bold text-gray-800 dark:text-white">LibreTV</h1>
         </div>
-        <div class="loading-animation"></div>
-        <div class="redirect-message">正在加载播放器...</div>
-        <div id="redirect-status">准备视频数据中，请稍候...</div>
-        <p class="redirect-hint">如果页面没有自动跳转，请<a href="player.html" id="manual-redirect">点击这里</a></p>
+
+        <!-- Loading Spinner -->
+        <div class="w-12 h-12 border-4 border-pink-500 border-t-transparent rounded-full animate-spin mb-6"></div>
+
+        <!-- Messages -->
+        <div class="text-lg font-semibold mb-2">正在加载播放器...</div>
+        <div id="redirect-status" class="text-gray-500 dark:text-gray-400 mb-6">准备视频数据中，请稍候...</div>
+        <p class="text-sm text-gray-500 dark:text-gray-400">
+            如果页面没有自动跳转，请 <a href="player.html" id="manual-redirect" class="text-pink-500 hover:underline">点击这里</a>
+        </p>
     </div>
 </body>
 </html>
